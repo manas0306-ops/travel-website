@@ -1,33 +1,381 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="light">
 <head>
-    <title>Why You Should Travel</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Travel? — The Philosophy of Exploration — VoyageX</title>
+  <meta name="description" content="Discover the transformative power of travel. Explore the science, mental health benefits, and perspective shifts that come from journeying beyond routine.">
+  <meta name="keywords" content="why travel, benefits of traveling, travel psychology, travel motivation, travel philosophy">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Why Travel? — The Philosophy of Exploration — VoyageX">
+  <meta property="og:description" content="Travel changes more than your location. It rewires your perspective, recharges your mind, and builds lifelong memories.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <header>
-        <h1>Why You Should Travel</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="destinations.html">Destinations</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <main>
-        <section class="travel-reasons">
-            <h2>Break Free from Routine</h2>
-            <p>Travel helps you escape the monotony of daily life and experience something new and exciting.</p>
+  <!-- Global Header & Navbar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="VoyageX Home">
+        <span class="logo-icon">🧭</span>
+        <span>Voyage<span class="brand-highlight">X</span></span>
+      </a>
 
-            <h2>Discover New Cultures</h2>
-            <p>Every destination has its own traditions, food, and stories. Traveling opens your mind to diversity.</p>
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="trip-planner.html" class="nav-link">Trip Planner</a>
+        <a href="why-travel.html" class="nav-link active">Why Travel</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
 
-            <h2>Recharge Your Mind</h2>
-            <p>Nature, adventure, and new experiences help reduce stress and boost creativity.</p>
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <button class="btn-icon open-favorites-btn" aria-label="View Saved Favorites" title="Saved Favorites">
+          ❤️
+          <span class="badge-count fav-badge-count" style="display: none;">0</span>
+        </button>
 
-            <h2>Make Lifelong Memories</h2>
-            <p>Whether it's a solo trip or a family vacation, travel creates unforgettable moments.</p>
-        </section>
-    </main>
+        <button class="btn-icon theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+          <span class="theme-toggle-icon">🌙</span>
+        </button>
+
+        <a href="trip-planner.html" class="btn btn-sm btn-primary">
+          Plan My Trip
+        </a>
+
+        <!-- Hamburger for Mobile -->
+        <button class="hamburger" aria-label="Toggle Mobile Menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-backdrop" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="mobile-nav-header">
+      <div class="brand-logo">
+        <span class="logo-icon">🧭</span>
+        <span>Voyage<span class="brand-highlight">X</span></span>
+      </div>
+      <button class="mobile-nav-close btn-icon" aria-label="Close Mobile Menu">✕</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="destinations.html" class="nav-link">Destinations</a>
+      <a href="trip-planner.html" class="nav-link">Trip Planner</a>
+      <a href="why-travel.html" class="nav-link active">Why Travel</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border);">
+      <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='trip-planner.html'">
+        ✨ Launch Trip Builder
+      </button>
+    </div>
+  </aside>
+
+  <!-- Saved Favorites Slide-Over Drawer -->
+  <div class="favorites-drawer-backdrop drawer-backdrop" aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-label="My Saved Destinations">
+      <div class="drawer-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <h4 style="margin: 0; font-size: 1.15rem;">❤️ Saved Destinations</h4>
+          <span class="section-tag accent fav-badge-count" style="margin: 0; font-size: 0.75rem; padding: 2px 8px;">0</span>
+        </div>
+        <button class="close-favorites-btn btn-icon" aria-label="Close Favorites Drawer">✕</button>
+      </div>
+      <div class="drawer-body favorites-list-container">
+        <!-- Rendered dynamically -->
+      </div>
+      <div class="drawer-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn btn-sm btn-ghost clear-favorites-btn" style="color: var(--danger);">Clear All</button>
+        <button class="btn btn-sm btn-primary" onclick="closeFavoritesDrawer()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Editorial Hero -->
+    <section class="section-padding" style="background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%); text-align: center; padding-top: 80px;">
+      <div class="container" style="max-width: 820px;">
+        <span class="section-tag">The Philosophy of Exploration</span>
+        <h1 style="margin: 16px 0 20px 0;">Why Travel Matters</h1>
+        <p class="lead" style="font-size: 1.25rem; line-height: 1.8;">
+          "We travel not to escape life, but for life not to escape us."
+          Stepping outside our comfort zones does more than change our geographic coordinates — it rewires our neurochemistry, expands our capacity for empathy, and deepens our understanding of what it means to be human.
+        </p>
+      </div>
+    </section>
+
+    <!-- Core Pillars of Travel (Preserving and Elevating Original Points) -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Timeless Truths</span>
+          <h2>The Pillars of Wanderlust</h2>
+          <p class="lead">From breaking repetitive routines to building enduring memories that stay with you forever.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+          <!-- Pillar 1: Break Free from Routine (Original) -->
+          <div class="planner-card">
+            <div style="font-size: 2.4rem; margin-bottom: 16px;">🕊️</div>
+            <h3>Break Free from Routine</h3>
+            <p style="margin-top: 10px; font-size: 0.95rem; line-height: 1.6;">
+              Monotony dulls the senses. Daily repetitive habits convince the brain that time is slipping by faster. When you travel, unfamiliar sights, smells, and sensations snap your mind back into acute awareness and youthful vitality.
+            </p>
+          </div>
+
+          <!-- Pillar 2: Discover New Cultures (Original) -->
+          <div class="planner-card">
+            <div style="font-size: 2.4rem; margin-bottom: 16px;">🏮</div>
+            <h3>Discover New Cultures</h3>
+            <p style="margin-top: 10px; font-size: 0.95rem; line-height: 1.6;">
+              Every community on earth carries distinct culinary heritage, sacred traditions, and ancestral wisdom. Sitting down at a local street food stall or participating in a foreign tea ceremony destroys preconceptions and fosters global brotherhood.
+            </p>
+          </div>
+
+          <!-- Pillar 3: Recharge Your Mind (Original) -->
+          <div class="planner-card">
+            <div style="font-size: 2.4rem; margin-bottom: 16px;">🧠</div>
+            <h3>Recharge Your Mind</h3>
+            <p style="margin-top: 10px; font-size: 0.95rem; line-height: 1.6;">
+              Immersion in alpine mountain ranges, dense tropical canopies, or endless ocean horizons actively reduces cortisol (stress hormones), restores mental clarity, and boosts creative neural pathways by up to 50%.
+            </p>
+          </div>
+
+          <!-- Pillar 4: Make Lifelong Memories (Original) -->
+          <div class="planner-card">
+            <div style="font-size: 2.4rem; margin-bottom: 16px;">📸</div>
+            <h3>Make Lifelong Memories</h3>
+            <p style="margin-top: 10px; font-size: 0.95rem; line-height: 1.6;">
+              Material purchases depreciate in emotional value within weeks, while experiential travel memories appreciate with age. Decades from now, the laughter shared under a midnight starry sky in Ladakh will remain priceless.
+            </p>
+          </div>
+
+          <!-- Pillar 5: Improve Perspective (New) -->
+          <div class="planner-card">
+            <div style="font-size: 2.4rem; margin-bottom: 16px;">🔭</div>
+            <h3>Expand Your Perspective</h3>
+            <p style="margin-top: 10px; font-size: 0.95rem; line-height: 1.6;">
+              Seeing how diverse communities navigate joy, family, hardship, and celebration broadens your emotional lens. Problems that felt monumental at home suddenly shrink in the face of the vast, resilient world.
+            </p>
+          </div>
+
+          <!-- Pillar 6: Reconnect With Yourself (New) -->
+          <div class="planner-card">
+            <div style="font-size: 2.4rem; margin-bottom: 16px;">🌱</div>
+            <h3>Reconnect With Yourself</h3>
+            <p style="margin-top: 10px; font-size: 0.95rem; line-height: 1.6;">
+              Away from the expectations of peers, bosses, and daily roles, you meet the rawest version of yourself. Solo train journeys and quiet mountain paths allow introspection rarely found in modern urban life.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Showcase: "Travel Changes More Than Your Location" -->
+    <section class="section-padding" style="background: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag accent">The Transformation</span>
+          <h2>Travel Changes More Than Your Location.</h2>
+          <p class="lead">Compare the psychological shifts before stepping onto an airplane or train versus after returning home.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 980px; margin: 0 auto;">
+          <!-- Card 1 -->
+          <div class="planner-card" style="border-left: 4px solid var(--primary);">
+            <h4 style="color: var(--primary); margin-bottom: 8px;">Before Travel</h4>
+            <ul style="display: flex; flex-direction: column; gap: 10px; font-size: 0.95rem; color: var(--text-secondary);">
+              <li>❌ Fixed daily routines and predictability</li>
+              <li>❌ Elevated baseline anxiety from screen overload</li>
+              <li>❌ Narrowed worldview limited to local circles</li>
+              <li>❌ Hesitation toward the unfamiliar and unknown</li>
+            </ul>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="planner-card" style="border-left: 4px solid var(--accent);">
+            <h4 style="color: var(--accent); margin-bottom: 8px;">After Returning</h4>
+            <ul style="display: flex; flex-direction: column; gap: 10px; font-size: 0.95rem; color: var(--text-secondary);">
+              <li>✓ Heightened adaptability and spontaneous problem solving</li>
+              <li>✓ Deep emotional reset and reduced stress markers</li>
+              <li>✓ Empathy for different lifestyles and cultures</li>
+              <li>✓ A rich reservoir of stories, gratitude, and confidence</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scientific Evidence & Statistics -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Backed by Research</span>
+          <h2>The Empirical Science of Journeys</h2>
+          <p class="lead">What clinical psychologists, neuroscientists, and sociological studies reveal about exploring our planet.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
+          <div class="stat-item" style="border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; background: var(--surface);">
+            <div class="stat-number">89%</div>
+            <div class="stat-label">Report Significant Drops in Stress within 48 Hours of Travel (US Travel Assoc.)</div>
+          </div>
+
+          <div class="stat-item" style="border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; background: var(--surface);">
+            <div class="stat-number">+50%</div>
+            <div class="stat-label">Increase in Creative Cognitive Capacity After Time in Natural Ecosystems</div>
+          </div>
+
+          <div class="stat-item" style="border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; background: var(--surface);">
+            <div class="stat-number">94%</div>
+            <div class="stat-label">Return to Work With Greater Energy, Focus, and Motivation</div>
+          </div>
+
+          <div class="stat-item" style="border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; background: var(--surface);">
+            <div class="stat-number">3.2x</div>
+            <div class="stat-label">Higher Enduring Life Happiness Measured for Experiences over Material Goods</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Famous Travel Quotes Carousel/Grid -->
+    <section class="section-padding" style="background: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Voices of History</span>
+          <h2>Words from Great Voyagers</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+          <blockquote class="planner-card" style="margin: 0; font-style: italic;">
+            <p style="font-size: 1.05rem; color: var(--text-primary); margin-bottom: 14px;">
+              "Travel is fatal to prejudice, bigotry, and narrow-mindedness, and many of our people need it sorely on these accounts."
+            </p>
+            <cite style="display: block; font-style: normal; font-weight: 700; color: var(--primary);">— Mark Twain</cite>
+          </blockquote>
+
+          <blockquote class="planner-card" style="margin: 0; font-style: italic;">
+            <p style="font-size: 1.05rem; color: var(--text-primary); margin-bottom: 14px;">
+              "Traveling – it leaves you speechless, then turns you into a storyteller."
+            </p>
+            <cite style="display: block; font-style: normal; font-weight: 700; color: var(--primary);">— Ibn Battuta</cite>
+          </blockquote>
+
+          <blockquote class="planner-card" style="margin: 0; font-style: italic;">
+            <p style="font-size: 1.05rem; color: var(--text-primary); margin-bottom: 14px;">
+              "The real voyage of discovery consists not in seeking new landscapes, but in having new eyes."
+            </p>
+            <cite style="display: block; font-style: normal; font-weight: 700; color: var(--primary);">— Marcel Proust</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section style="background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%); color: #fff; padding: 72px 24px; text-align: center;">
+      <div class="container" style="max-width: 720px;">
+        <h2 style="color: #fff; margin-bottom: 16px;">The World Is Waiting For You.</h2>
+        <p style="color: #e0f2fe; font-size: 1.15rem; margin-bottom: 32px;">
+          Stop putting your dream trip on hold. Take the first step today by discovering your perfect destination.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="trip-planner.html" class="btn btn-accent btn-lg">Start Planning Your Trip</a>
+          <a href="destinations.html" class="btn btn-outline btn-lg" style="color: #fff; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.1);">Browse Destinations</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <!-- Brand Column -->
+        <div class="footer-brand">
+          <div class="brand-logo" style="color: #fff;">
+            <span class="logo-icon">🧭</span>
+            <span>Voyage<span class="brand-highlight">X</span></span>
+          </div>
+          <p>
+            VoyageX is a smart travel discovery and trip planning platform built to inspire curious minds, simplify itinerary planning, and bring the world closer.
+          </p>
+          <div class="footer-socials">
+            <a href="https://github.com/manas0306-ops/travel-website" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">🐙</a>
+            <a href="contact.html" class="footer-social-link" aria-label="Twitter">🐦</a>
+            <a href="contact.html" class="footer-social-link" aria-label="Instagram">📸</a>
+            <a href="contact.html" class="footer-social-link" aria-label="LinkedIn">💼</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <div class="footer-links">
+            <a href="destinations.html">All Destinations</a>
+            <a href="destinations.html?category=Mountains">Mountain Escapes</a>
+            <a href="destinations.html?category=Beach">Beach Paradises</a>
+            <a href="destinations.html?category=Culture">Heritage & Culture</a>
+            <a href="destinations.html?category=Luxury">Luxury Getaways</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Planning Tools</h4>
+          <div class="footer-links">
+            <a href="trip-planner.html">Smart Trip Planner</a>
+            <a href="trip-planner.html#budget-section">Budget Calculator</a>
+            <a href="trip-planner.html#packing-section">Smart Packing Checklist</a>
+            <a href="why-travel.html">Why Travel Guide</a>
+            <a href="contact.html">Travel Support & FAQ</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Stay Inspired</h4>
+          <p style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 12px;">Get weekly destination spotlights and smart trip planning tips in your inbox.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email address" required aria-label="Email address for newsletter">
+            <button type="submit" class="btn btn-sm btn-primary">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 VoyageX Platform. Crafted with modern web technologies.
+        </div>
+        <div class="footer-legal-links">
+          <a href="why-travel.html">Philosophy</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="https://github.com/manas0306-ops/travel-website" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/destinations-data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Trip Planner & Budget Engine — VoyageX</title>
+  <meta name="description" content="Generate custom day-by-day travel itineraries, estimate realistic travel budgets, and build smart packing checklists tailored to your vacation style.">
+  <meta name="keywords" content="trip planner, itinerary generator, travel budget calculator, packing checklist, vacation itinerary">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Smart Trip Planner & Budget Engine — VoyageX">
+  <meta property="og:description" content="Create personalized travel itineraries with realistic budget breakdowns and smart packing checklists.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Global Header & Navbar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="VoyageX Home">
+        <span class="logo-icon">🧭</span>
+        <span>Voyage<span class="brand-highlight">X</span></span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="trip-planner.html" class="nav-link active">Trip Planner</a>
+        <a href="why-travel.html" class="nav-link">Why Travel</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <button class="btn-icon open-favorites-btn" aria-label="View Saved Favorites" title="Saved Favorites">
+          ❤️
+          <span class="badge-count fav-badge-count" style="display: none;">0</span>
+        </button>
+
+        <button class="btn-icon theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+          <span class="theme-toggle-icon">🌙</span>
+        </button>
+
+        <a href="destinations.html" class="btn btn-sm btn-outline">
+          Explore Places
+        </a>
+
+        <!-- Hamburger for Mobile -->
+        <button class="hamburger" aria-label="Toggle Mobile Menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-backdrop" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="mobile-nav-header">
+      <div class="brand-logo">
+        <span class="logo-icon">🧭</span>
+        <span>Voyage<span class="brand-highlight">X</span></span>
+      </div>
+      <button class="mobile-nav-close btn-icon" aria-label="Close Mobile Menu">✕</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="destinations.html" class="nav-link">Destinations</a>
+      <a href="trip-planner.html" class="nav-link active">Trip Planner</a>
+      <a href="why-travel.html" class="nav-link">Why Travel</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border);">
+      <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='destinations.html'">
+        Browse Destinations
+      </button>
+    </div>
+  </aside>
+
+  <!-- Saved Favorites Slide-Over Drawer -->
+  <div class="favorites-drawer-backdrop drawer-backdrop" aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-label="My Saved Destinations">
+      <div class="drawer-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <h4 style="margin: 0; font-size: 1.15rem;">❤️ Saved Destinations</h4>
+          <span class="section-tag accent fav-badge-count" style="margin: 0; font-size: 0.75rem; padding: 2px 8px;">0</span>
+        </div>
+        <button class="close-favorites-btn btn-icon" aria-label="Close Favorites Drawer">✕</button>
+      </div>
+      <div class="drawer-body favorites-list-container">
+        <!-- Rendered dynamically -->
+      </div>
+      <div class="drawer-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn btn-sm btn-ghost clear-favorites-btn" style="color: var(--danger);">Clear All</button>
+        <button class="btn btn-sm btn-primary" onclick="closeFavoritesDrawer()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main id="main-content" class="section-padding">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="section-header" style="margin-bottom: 40px;">
+        <span class="section-tag">AI-Style Trip Engineering</span>
+        <h1>Smart Trip Planner</h1>
+        <p class="lead">Select your destination, customize duration, style, and travel interests to instantly generate a tailored day-by-day itinerary and transparent budget breakdown.</p>
+      </div>
+
+      <!-- Planner Layout -->
+      <div class="planner-layout">
+        <!-- Left Column: Controls & Inputs -->
+        <aside class="planner-card">
+          <div class="planner-card-header">
+            <h3>⚙️ Trip Parameters</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Adjust variables to recalculate itinerary and costs.</p>
+          </div>
+
+          <!-- Destination Picker -->
+          <div class="form-group">
+            <label for="planner-destination">Target Destination:</label>
+            <select id="planner-destination" class="form-control" aria-label="Target Destination">
+              <!-- Dynamically populated via js/planner.js -->
+            </select>
+          </div>
+
+          <!-- Travelers & Days Row -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label for="planner-travelers">Travelers:</label>
+              <input type="number" id="planner-travelers" class="form-control" value="2" min="1" max="20" aria-label="Number of Travelers">
+            </div>
+            <div class="form-group">
+              <label for="planner-days">Days (1 - 14):</label>
+              <input type="number" id="planner-days" class="form-control" value="4" min="1" max="14" aria-label="Number of Days">
+            </div>
+          </div>
+
+          <!-- Travel Style Selector -->
+          <div class="form-group">
+            <label>Travel Style:</label>
+            <div class="style-selector-grid">
+              <div class="style-option" data-style="Budget" role="button" tabindex="0">
+                <span class="icon">🎒</span>
+                <span class="name">Budget</span>
+              </div>
+              <div class="style-option selected" data-style="Standard" role="button" tabindex="0">
+                <span class="icon">⚖️</span>
+                <span class="name">Standard</span>
+              </div>
+              <div class="style-option" data-style="Luxury" role="button" tabindex="0">
+                <span class="icon">💎</span>
+                <span class="name">Luxury</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interests Multi-select -->
+          <div class="form-group">
+            <label>Trip Focus & Interests:</label>
+            <div class="interest-tags-grid">
+              <span class="interest-tag-chip" data-interest="Adventure">⚡ Adventure</span>
+              <span class="interest-tag-chip selected" data-interest="Food">🍜 Food</span>
+              <span class="interest-tag-chip selected" data-interest="Nature">🌿 Nature</span>
+              <span class="interest-tag-chip" data-interest="Culture">🏛️ Culture</span>
+              <span class="interest-tag-chip" data-interest="Shopping">🛍️ Shopping</span>
+              <span class="interest-tag-chip selected" data-interest="Photography">📸 Photography</span>
+              <span class="interest-tag-chip" data-interest="Relaxation">🏖️ Relaxation</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 24px;">
+            <button id="btn-regen-itinerary" class="btn btn-outline" style="width: 100%;">
+              🔄 Regenerate Itinerary
+            </button>
+            <button id="btn-save-trip" class="btn btn-primary" style="width: 100%;">
+              💾 Save Trip to My Storage
+            </button>
+            <div style="display: flex; gap: 8px;">
+              <button id="btn-print-itinerary" class="btn btn-sm btn-ghost" style="flex: 1;" title="Print or save as PDF">
+                🖨️ Print
+              </button>
+              <button id="btn-copy-itinerary" class="btn btn-sm btn-ghost" style="flex: 1;" title="Copy shareable summary">
+                📋 Copy Share
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Column: Itinerary & Budget Results -->
+        <div>
+          <!-- Transparent Budget Calculator Banner -->
+          <section id="budget-section" class="budget-summary-card" aria-label="Estimated Budget Breakdown">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+              <div>
+                <h3 style="margin-bottom: 4px;">💰 Estimated Trip Budget</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Transparent itemized breakdown based on duration and style.</p>
+              </div>
+              <span class="section-tag">Real-Time Forecast</span>
+            </div>
+
+            <!-- Total Cost Highlight -->
+            <div class="budget-total-box">
+              <div style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; opacity: 0.9;">Total Estimated Cost</div>
+              <div class="budget-total-val" id="budget-total-display">₹0</div>
+              <div style="font-size: 0.85rem; opacity: 0.9;">For all travelers • Flights not included</div>
+            </div>
+
+            <!-- Itemized Cost Grid -->
+            <div class="budget-items-grid">
+              <div class="budget-item-box">
+                <div class="budget-item-label">🏨 Stay</div>
+                <div class="budget-item-val" id="budget-stay-val">₹0</div>
+              </div>
+              <div class="budget-item-box">
+                <div class="budget-item-label">🍜 Food</div>
+                <div class="budget-item-val" id="budget-food-val">₹0</div>
+              </div>
+              <div class="budget-item-box">
+                <div class="budget-item-label">🚗 Transit</div>
+                <div class="budget-item-val" id="budget-transit-val">₹0</div>
+              </div>
+              <div class="budget-item-box">
+                <div class="budget-item-label">🎟️ Activities</div>
+                <div class="budget-item-val" id="budget-activity-val">₹0</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Generated Itinerary Timeline -->
+          <section aria-label="Generated Daily Itinerary">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <div>
+                <h3 style="margin: 0;">🗓️ Personalized Daily Itinerary</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 2px 0 0 0;">Morning, afternoon, and evening recommendations.</p>
+              </div>
+            </div>
+
+            <div class="itinerary-container" id="itinerary-results">
+              <!-- Dynamically rendered via js/planner.js -->
+            </div>
+          </section>
+
+          <!-- Saved Trips Section -->
+          <section style="margin-top: 48px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <div>
+                <h4 style="margin: 0; font-size: 1.2rem;">📂 My Saved Trips</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 2px 0 0 0;">Trips saved in your browser storage.</p>
+              </div>
+            </div>
+            <div id="saved-trips-list">
+              <!-- Rendered via js/planner.js -->
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Smart Packing Checklist Section -->
+      <section id="packing-section" class="checklist-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <span class="section-tag">Essential Preparation</span>
+            <h3 style="margin-top: 6px; margin-bottom: 4px;">🧳 Smart Packing Checklist</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Select your trip category, check items as you pack, and your progress is saved automatically.</p>
+          </div>
+          <button id="btn-reset-checklist" class="btn btn-sm btn-ghost" style="color: var(--danger);">Reset Progress</button>
+        </div>
+
+        <!-- Category Tabs -->
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+          <button class="category-pill packing-category-tab active" data-pack-cat="Beach">🏖️ Beach</button>
+          <button class="category-pill packing-category-tab" data-pack-cat="Mountains">🏔️ Mountains</button>
+          <button class="category-pill packing-category-tab" data-pack-cat="City">🏙️ City</button>
+          <button class="category-pill packing-category-tab" data-pack-cat="Adventure">⚡ Adventure</button>
+          <button class="category-pill packing-category-tab" data-pack-cat="Winter">❄️ Winter</button>
+          <button class="category-pill packing-category-tab" data-pack-cat="International">✈️ International</button>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-top: 20px;">
+          <span>Packing Progress</span>
+          <span id="packing-progress-text">0 of 9 items packed (0%)</span>
+        </div>
+        <div class="checklist-progress-bar-container">
+          <div class="checklist-progress-fill" id="packing-progress-fill"></div>
+        </div>
+
+        <!-- Checklist Grid -->
+        <div class="checklist-items-grid" id="packing-items-grid">
+          <!-- Populated dynamically via js/planner.js -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <!-- Brand Column -->
+        <div class="footer-brand">
+          <div class="brand-logo" style="color: #fff;">
+            <span class="logo-icon">🧭</span>
+            <span>Voyage<span class="brand-highlight">X</span></span>
+          </div>
+          <p>
+            VoyageX is a smart travel discovery and trip planning platform built to inspire curious minds, simplify itinerary planning, and bring the world closer.
+          </p>
+          <div class="footer-socials">
+            <a href="https://github.com/manas0306-ops/travel-website" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">🐙</a>
+            <a href="contact.html" class="footer-social-link" aria-label="Twitter">🐦</a>
+            <a href="contact.html" class="footer-social-link" aria-label="Instagram">📸</a>
+            <a href="contact.html" class="footer-social-link" aria-label="LinkedIn">💼</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <div class="footer-links">
+            <a href="destinations.html">All Destinations</a>
+            <a href="destinations.html?category=Mountains">Mountain Escapes</a>
+            <a href="destinations.html?category=Beach">Beach Paradises</a>
+            <a href="destinations.html?category=Culture">Heritage & Culture</a>
+            <a href="destinations.html?category=Luxury">Luxury Getaways</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Planning Tools</h4>
+          <div class="footer-links">
+            <a href="trip-planner.html">Smart Trip Planner</a>
+            <a href="trip-planner.html#budget-section">Budget Calculator</a>
+            <a href="trip-planner.html#packing-section">Smart Packing Checklist</a>
+            <a href="why-travel.html">Why Travel Guide</a>
+            <a href="contact.html">Travel Support & FAQ</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Stay Inspired</h4>
+          <p style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 12px;">Get weekly destination spotlights and smart trip planning tips in your inbox.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email address" required aria-label="Email address for newsletter">
+            <button type="submit" class="btn btn-sm btn-primary">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 VoyageX Platform. Crafted with modern web technologies.
+        </div>
+        <div class="footer-legal-links">
+          <a href="why-travel.html">Philosophy</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="https://github.com/manas0306-ops/travel-website" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/destinations-data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/planner.js"></script>
+</body>
+</html>

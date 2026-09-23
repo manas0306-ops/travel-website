@@ -1,0 +1,205 @@
+/* ==========================================================================
+   VOYAGEX DESIGN SYSTEM — RESPONSIVE STYLESHEET
+   Mobile Breakpoints, Hamburger Navigation, Touch Targets & Grid Adjustments
+   ========================================================================== */
+
+/* --- TABLETS & SMALL LAPTOPS (<= 1024px) --- */
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 68px;
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .stat-item {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 14px;
+  }
+  .stat-item:nth-child(3),
+  .stat-item:nth-child(4) {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .planner-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  .compare-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- MOBILE & SMALL TABLETS (<= 768px) --- */
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  /* Navigation & Header */
+  .nav-menu {
+    display: none; /* Hidden on mobile; drawer used instead */
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hero Adjustments */
+  .hero-section {
+    min-height: auto;
+    padding: 60px 16px 80px 16px;
+  }
+
+  .hero-search-card {
+    flex-direction: column;
+    padding: 12px;
+    border-radius: var(--radius-lg);
+  }
+
+  .search-field-group {
+    width: 100%;
+    padding: 8px 6px;
+  }
+
+  .hero-search-card .btn {
+    width: 100%;
+  }
+
+  /* Stats Bar on Mobile */
+  .stats-bar {
+    grid-template-columns: 1fr 1fr;
+    padding: 16px;
+    margin-top: -30px;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
+  }
+
+  /* Filter Toolbar */
+  .filter-search-row {
+    flex-direction: column;
+  }
+
+  .filter-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .filter-group select {
+    flex: 1;
+    max-width: 60%;
+  }
+
+  /* Destination Modal on Mobile */
+  .destination-modal-hero {
+    height: 240px;
+    padding: 20px;
+  }
+
+  .detail-chips-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal-actions-footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .modal-actions-footer .btn {
+    width: 100%;
+  }
+
+  /* Budget Widget */
+  .budget-items-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .budget-total-val {
+    font-size: 2rem;
+  }
+
+  /* Travel Quiz */
+  .quiz-card-wrapper {
+    padding: 20px;
+  }
+
+  .quiz-recs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer on Mobile */
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .footer-legal-links {
+    justify-content: center;
+  }
+
+  /* Map Container */
+  #voyagex-map {
+    height: 360px;
+  }
+}
+
+/* --- SMALL MOBILE (<= 480px) --- */
+@media (max-width: 480px) {
+  .destinations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-bar {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-item {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+
+  .stat-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .hero-quick-tags {
+    font-size: 0.8rem;
+  }
+
+  .compare-floating-bar {
+    width: 92%;
+    padding: 10px 16px;
+    justify-content: space-between;
+  }
+
+  .compare-chips-preview {
+    display: none;
+  }
+}

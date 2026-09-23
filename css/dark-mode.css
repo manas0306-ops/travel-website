@@ -1,0 +1,145 @@
+/* ==========================================================================
+   VOYAGEX DESIGN SYSTEM — DARK MODE STYLESHEET
+   Meticulously designed dark palette for high contrast and seamless immersion.
+   ========================================================================== */
+
+[data-theme="dark"] {
+  /* Brand Adjustments for Dark Mode */
+  --primary: #38bdf8;            /* Sky blue for readability on dark */
+  --primary-hover: #0ea5e9;
+  --primary-light: rgba(56, 189, 248, 0.15);
+  --primary-subtle: rgba(56, 189, 248, 0.08);
+  --primary-rgb: 56, 189, 248;
+
+  --accent: #fb923c;             /* Warm amber-orange */
+  --accent-hover: #f97316;
+  --accent-light: rgba(251, 146, 60, 0.18);
+  --accent-rgb: 251, 146, 60;
+
+  /* Surfaces & Backgrounds */
+  --bg-primary: #0a0f1d;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #1e293b;
+  --surface: #131d31;
+  --surface-elevated: #1e293b;
+  --border: #24324d;
+  --border-subtle: #334155;
+
+  /* Typography */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #8295b3;
+  --text-inverse: #0a0f1d;
+
+  /* Glassmorphism & Shadows */
+  --glass-bg: rgba(15, 23, 42, 0.88);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --modal-backdrop: rgba(0, 0, 0, 0.75);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 16px 32px rgba(0, 0, 0, 0.55);
+}
+
+/* Specific component tweaks in Dark Mode */
+[data-theme="dark"] .site-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .stats-bar {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .hero-search-card {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .search-input-box input,
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .filter-select {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .search-input-box input:focus,
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .filter-select:focus {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+[data-theme="dark"] .card-btn-fav {
+  background: rgba(15, 23, 42, 0.85);
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .card-btn-fav:hover {
+  color: var(--accent);
+  background: var(--surface);
+}
+
+[data-theme="dark"] .card-footer {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .category-pill {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .category-pill.active {
+  background: var(--primary);
+  color: #0b1120;
+  border-color: var(--primary);
+}
+
+[data-theme="dark"] .btn-outline {
+  border-color: var(--border);
+  background: transparent;
+  color: var(--text-primary);
+}
+[data-theme="dark"] .btn-outline:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+[data-theme="dark"] .style-option {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .check-item {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .quiz-option-btn {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .modal-actions-footer,
+[data-theme="dark"] .drawer-footer {
+  background: var(--bg-secondary);
+  border-top-color: var(--border);
+}
+
+[data-theme="dark"] .detail-chip {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .compare-col {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+}
